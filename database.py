@@ -34,14 +34,25 @@ def create_tables():
     conn.close()
 
 
-def insert_into_notes(data, time):
+def insert_into_notes(data, time, keyword_id):
     conn = create_db_connection()
     cur = conn.cursor()
     insert_query = f""" INSERT INTO Notes (
                     content, 
-                    date_added)
-                    VALUES ('{data}', '{time}')"""
+                    date_added, keywords_id)
+                    VALUES ('{data}', '{time}', {keyword_id})"""
     cur.execute(insert_query)
     conn.commit()
     cur.close()
     conn.close()
+
+def insert_into_keywords(keywords):
+    conn = create_db_connection()
+    cur = conn.cursor()
+    insert_query = f""" INSERT INTO keywords (Word) VALUES ('{keywords}') RETURNING Id"""
+    cur.execute(insert_query)
+    keywords_id = cur.fetchone()[0]
+    conn.commit()
+    cur.close()
+    conn.close()
+    return keywords_id
