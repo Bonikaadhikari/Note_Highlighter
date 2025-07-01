@@ -46,13 +46,29 @@ def insert_into_notes(data, time, keyword_id):
     cur.close()
     conn.close()
 
+
 def insert_into_keywords(keywords):
     conn = create_db_connection()
     cur = conn.cursor()
-    insert_query = f""" INSERT INTO keywords (Word) VALUES ('{keywords}') RETURNING Id"""
+    insert_query = (
+        f""" INSERT INTO keywords (Word) VALUES ('{keywords}') RETURNING Id"""
+    )
     cur.execute(insert_query)
     keywords_id = cur.fetchone()[0]
     conn.commit()
     cur.close()
     conn.close()
     return keywords_id
+
+
+def retrieve_keyword_and_notes():
+    conn = create_db_connection()
+    cur = conn.cursor()
+    retrieve_query = f"""SELECT k.Word, n.content from keywords k
+                        INNER JOIN Notes n on n.keywords_id = k.id"""
+    cur.execute(retrieve_query)
+    rows = cur.fetchall()
+    # conn.commit()
+    cur.close()
+    conn.close()
+    return rows
