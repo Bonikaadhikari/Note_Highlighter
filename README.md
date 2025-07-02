@@ -38,7 +38,7 @@ python main.py --list
 **If sample.txt contains:**
 <i>Python is great for scripting. SQL is used for data. I love using both!</i><br>
 **And you run:** 
-<i>python main.py --file sample.txt --keywords python</i><br>
+<i>python app.py --file sample.txt --keywords python</i><br>
 **You'll get:**
 <i>Python is great for scripting.</i>
 
