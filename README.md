@@ -31,7 +31,7 @@ python app.py --file sample.txt --keywords python
 ```
 - List All Keywords and Notes
 ```
-python main.py --list
+python app.py --list
 ```
 
 ## Example
